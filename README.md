@@ -122,7 +122,7 @@ Set-Location C:\projects\PlanarLlama
  --alias "unsloth/Qwen3.6-35B-A3B-MTP-GGUF" `
  --no-webui --no-mmap --ctx-size 131072 --seed 3407 --prio 2 --jinja -ngl 0 `
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
- --cache-type-k planar4 --cache-type-v f16 `
+ --cache-type-k planar4 --cache-type-v q8_0 `
  --spec-type ngram-mod,draft-mtp --spec-draft-n-max 3 `
  --parallel 1 `
  --host 127.0.0.1 --port 11434 `
