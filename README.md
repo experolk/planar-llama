@@ -88,11 +88,18 @@ cmake --build .\build --config RelWithDebInfo
 Store your Huggingface token in a file called `HF_TOKEN.txt` and download the model:
 
 ```ps
-Invoke-WebRequest `
- -Uri https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-IQ4_XS.gguf `
- -Headers @{ "Authorization": "Bearer $(Get-Content -Path .\HF_TOKEN.txt -Raw)" } `
- -OutFile .\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf
+$headers = @"
+Authorization: Bearer $(Get-Content -Path .\HF_TOKEN.txt -Raw)
+"@
+$model = "unsloth/Qwen3.6-35B-A3B-MTP-GGUF"
+$filename = "Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf"
+Start-BitsTransfer `
+ -Source https://huggingface.co/${model}/resolve/main/${filename} `
+ -Destination C:\projects\PlanarLlama\${filename} `
+ -CustomHeaders ${headers}
 ```
+
+Note that the `IQ4` quantifications cannot be used with PlanarQuant.
 
 ## Run
 
@@ -101,8 +108,8 @@ tokens to 128k tokens, to reduce the memory foot-print.
 
 ```ps
 .\build\bin\RelWithDebInfo\llama-server.exe `
- --model ".\Qwen3.6-35B-A3B-UD-IQ4_XS.gguf" `
- --alias "unsloth/Qwen3.6-35B-A3B-GGUF" `
+ --model ".\Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf" `
+ --alias "unsloth/Qwen3.6-35B-A3B-MTP-GGUF" `
  --no-webui --no-mmap --ctx-size 131072 --seed 3407 --prio 2 --jinja -ngl 0 `
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
  --cache-type-k planar4 --cache-type-v f16 `
@@ -118,7 +125,7 @@ curl `
   --header "Content-Type: application/json" `
   --header "X-API-Key: hunter2" `
   -d "{ `
-  `"model`": `"unsloth/Qwen3.6-35B-A3B-GGUF`", `
+  `"model`": `"unsloth/Qwen3.6-35B-A3B-MTP-GGUF`", `
   `"messages`": [`
     { `"role`": `"system`", `"content`": `"Brief professional developer. Only one line explanation.`"}, `
     { `"role`": `"user`", `"content`": `"What is 2 + 2`" }, `
