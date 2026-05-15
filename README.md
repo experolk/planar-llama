@@ -74,13 +74,13 @@ cmake -S . -B .\build -G "Visual Studio 18 2026" -Wno-dev -A x64 -DCMAKE_BUILD_T
  -DBLAS_INCLUDE_DIRS="${AOCL_DIR}\amd-blis\include\LP64" `
  -DLLAMA_BUILD_COMMON=ON -DLLAMA_BUILD_SERVER=ON -DLLAMA_BUILD_TOOLS=ON `
  -DGGML_CCACHE=OFF -DGGML_VULKAN=OFF -DLLAMA_CURL=OFF -DLLAMA_BUILD_EXAMPLES=OFF `
- -DLLAMA_BUILD_TESTS=OFF -DLLAMA_OPENSSL=OFF
+ -DLLAMA_BUILD_TESTS=OFF -DLLAMA_OPENSSL=OFF -DLLAMA_BUILD_WEBUI=OFF
 ```
 
 Do the build itself; this will result in the `llama-server` executable:
 
 ```ps
-cmake --build .\build --config RelWithDebInfo
+cmake --build .\build --config RelWithDebInfo --target llama-server
 ```
 
 ## Download
