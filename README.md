@@ -114,6 +114,7 @@ tokens to 128k tokens, to reduce the memory foot-print.
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
  --cache-type-k planar4 --cache-type-v f16 `
  --spec-type ngram-mod,draft-mtp --spec-draft-n-max 3 `
+ --parallel 1 `
  --host 127.0.0.1 --port 11434 `
  --api-key hunter2
 ```
