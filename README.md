@@ -83,6 +83,15 @@ Do the build itself; this will result in the `llama-server` executable:
 cmake --build .\build --config RelWithDebInfo --target llama-server
 ```
 
+Copy the built version to a program directory
+
+```ps
+New-Item -ItemType Directory -Path C:\projects\PlanarLlama -Force | Out-Null
+$files = "ggml-base.dll","ggml-blas.dll","ggml-cpu.dll","ggml.dll",`
+  "llama-common.dll","llama.dll","mtmd.dll","llama-server.exe"
+Copy-Item -Path .\build\bin\RelWithDebInfo\* -Destination C:\projects\PlanarLlama -Include $files
+```
+
 ## Download
 
 Store your Huggingface token in a file called `HF_TOKEN.txt` and download the model:
@@ -107,7 +116,8 @@ Launch the server. Notice that the context size has been reduced from the suppor
 tokens to 128k tokens, to reduce the memory foot-print.
 
 ```ps
-.\build\bin\RelWithDebInfo\llama-server.exe `
+Set-Location C:\projects\PlanarLlama
+& ".\llama-server.exe" `
  --model ".\Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf" `
  --alias "unsloth/Qwen3.6-35B-A3B-MTP-GGUF" `
  --no-webui --no-mmap --ctx-size 131072 --seed 3407 --prio 2 --jinja -ngl 0 `
