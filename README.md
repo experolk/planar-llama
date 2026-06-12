@@ -100,8 +100,8 @@ Store your Huggingface token in a file called `HF_TOKEN.txt` and download the mo
 $headers = @"
 Authorization: Bearer $(Get-Content -Path .\HF_TOKEN.txt -Raw)
 "@
-$model = "unsloth/Qwen3.6-35B-A3B-MTP-GGUF"
-$filename = "Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf"
+$model = "unsloth/Qwen3.5-9B-MTP-GGUF"
+$filename = "Qwen3.5-9B-UD-Q4_K_XL.gguf"
 Start-BitsTransfer `
  -Source https://huggingface.co/${model}/resolve/main/${filename} `
  -Destination C:\projects\PlanarLlama\${filename} `
@@ -118,9 +118,9 @@ tokens to 128k tokens, to reduce the memory foot-print.
 ```ps
 Set-Location C:\projects\PlanarLlama
 & ".\llama-server.exe" `
- --model ".\Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf" `
- --alias "unsloth/Qwen3.6-35B-A3B-MTP-GGUF" `
  --no-webui --no-mmap --ctx-size 131072 --seed 3407 --prio 2 --jinja -ngl 0 `
+ --model ".\Qwen3.5-9B-UD-Q4_K_XL.gguf" `
+ --alias "unsloth/Qwen3.5-9B-MTP-GGUF" `
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
  --cache-type-k planar4 --cache-type-v q8_0 `
  --spec-type ngram-mod,draft-mtp --spec-draft-n-max 3 `
@@ -137,7 +137,7 @@ curl `
   --header "Content-Type: application/json" `
   --header "X-API-Key: hunter2" `
   -d "{ `
-  `"model`": `"unsloth/Qwen3.6-35B-A3B-MTP-GGUF`", `
+  `"model`": `"unsloth/Qwen3.5-9B-MTP-GGUF`", `
   `"messages`": [`
     { `"role`": `"system`", `"content`": `"Brief professional developer. Only one line explanation.`"}, `
     { `"role`": `"user`", `"content`": `"What is 2 + 2`" }, `
