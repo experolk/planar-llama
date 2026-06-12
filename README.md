@@ -125,6 +125,7 @@ Set-Location C:\projects\PlanarLlama
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
  --cache-type-k planar4 --cache-type-v q8_0 `
  --ctx-size 131072 --prio 2 --jinja -ngl 0 --flash-attn on `
+ --reasoning on --chat-template-kwargs "{`"preserve_thinking`":true}" `
  --host 127.0.0.1 --port 11434 --api-key hunter2
 ```
 
