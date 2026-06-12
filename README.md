@@ -118,15 +118,14 @@ tokens to 128k tokens, to reduce the memory foot-print.
 ```ps
 Set-Location C:\projects\PlanarLlama
 & ".\llama-server.exe" `
- --no-webui --no-mmap --ctx-size 131072 --seed 3407 --prio 2 --jinja -ngl 0 `
  --model ".\Qwen3.5-9B-UD-Q4_K_XL.gguf" `
  --alias "unsloth/Qwen3.5-9B-MTP-GGUF" `
+ --no-ui --parallel 1 --mlock `
+ --spec-type ngram-mod,draft-mtp --spec-draft-n-max 3 --draft-p-min 0.0 `
  --temp 0.6 --top_p 0.95 --top_k 20 --min_p 0.0 --presence_penalty 0.0 --repeat_penalty 1.0 `
  --cache-type-k planar4 --cache-type-v q8_0 `
- --spec-type ngram-mod,draft-mtp --spec-draft-n-max 3 `
- --parallel 1 `
- --host 127.0.0.1 --port 11434 `
- --api-key hunter2
+ --ctx-size 131072 --prio 2 --jinja -ngl 0 --flash-attn on `
+ --host 127.0.0.1 --port 11434 --api-key hunter2
 ```
 
 Make a request to the model from another console:
