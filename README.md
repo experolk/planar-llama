@@ -149,3 +149,6 @@ curl `
     `"preserve_thinking`": true `
   }}}"
 ```
+
+The output generation speed will be around 4 token/second on a regular
+office laptop (AMD Ryzen 5 Pro 230, 3.5GHz * 6 cores, 32 GiB RAM); similar to reading aloud.
